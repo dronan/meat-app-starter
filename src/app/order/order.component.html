@@ -18,6 +18,9 @@
             <div class="col-xs-12">
               <p class="lead">Seus dados:</p>
             </div>
+            <div class="col-xs-12">
+              <span class="help-block pull-right has-error-block" *ngIf="orderForm.hasError('emailsNotMatch')"><i class="fa fa-remove"></i>Emails não conferem</span>
+            </div>
             <div class="col-sm-6 col-xs-12">
                 <mt-input-container errorMessage="Campo obrigatório e com no minimo 5 caracteres" label="Nome">
                   <input class="form-control" formControlName="name" placeholder="Nome">
