@@ -42,7 +42,8 @@ export class RestaurantsComponent implements OnInit {
       searchControl: this.searchControl
     })
 
-    
+    this.searchControl.valueChanges.subscribe( searchTerm => console.log(searchTerm) )
+
   }
 
   toggleSearch(){
