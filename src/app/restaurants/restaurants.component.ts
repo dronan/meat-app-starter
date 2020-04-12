@@ -3,6 +3,9 @@ import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FormBuilder, FormControl, FormGroup }  from '@angular/forms'
+
+import 'rxjs/add/operator/switchMap'
+
 @Component({
   selector: 'mt-restaurants',
   templateUrl: './restaurants.component.html',
@@ -42,7 +45,11 @@ export class RestaurantsComponent implements OnInit {
       searchControl: this.searchControl
     })
 
-    this.searchControl.valueChanges.subscribe( searchTerm => console.log(searchTerm) )
+    this.searchControl.valueChanges
+      .switchMap( 
+      searchTerm => 
+        this.restaurantsService.restaurants(searchTerm))
+      .subscribe(restaurants => this.restaurants = restaurants);
 
   }
 
