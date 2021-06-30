@@ -12,12 +12,13 @@ import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 import { NotificationService } from './messages/notification.service';
 import { LoginService } from 'app/security/login/login.service';
 import { LoggedInGuard } from 'app/security/loggedin.guard';
+import { UserDetailComponent } from 'app/header/user-detail/user-detail.component';
 
 
 @NgModule({
-    declarations:[RadioComponent, InputComponent, RatingComponent, SnackbarComponent],
+    declarations:[RadioComponent, InputComponent, RatingComponent, SnackbarComponent, UserDetailComponent],
     imports: [CommonModule, ReactiveFormsModule, FormsModule],
-    exports: [RadioComponent, InputComponent, RatingComponent, CommonModule, ReactiveFormsModule, FormsModule, SnackbarComponent]
+    exports: [RadioComponent, InputComponent, RatingComponent, UserDetailComponent, CommonModule, ReactiveFormsModule, FormsModule, SnackbarComponent]
 })
 
 export class SharedModule {
