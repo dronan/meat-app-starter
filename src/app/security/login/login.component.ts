@@ -1,6 +1,8 @@
+import { NotificationService } from './../../shared/messages/notification.service';
 import { LoginService } from './login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private loginService: LoginService) { }
+              private loginService: LoginService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() { 
     this.loginForm = this.fb.group({
@@ -24,6 +27,12 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginService.login(this.loginForm.value.email,
                             this.loginForm.value.password)
-                      .subscribe( user => console.log(user))
+                      .subscribe( 
+                        success => { 
+                          this.notificationService.notify(`Bem vindo, ${success.name}`)
+                        },
+                        error => { 
+                          this.notificationService.notify(`${error.error.message}`)
+                        })
   }
 }
