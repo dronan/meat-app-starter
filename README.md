@@ -145,3 +145,20 @@ Dependências dos pacotes que devem ficar em package.json:
 ## Créditos
 
 Todas as imagens usadas na aplicação são pertencentes a freepik.com
+
+
+## Habilitar compileOnSave no VSCode
+
+Em um terminar, deixar executando o tsc -w em backend:
+
+```
+cd backend
+tsc -w
+```
+
+Em outro terminal, executa o nodemon
+
+```
+nodemon --watch backend backend/dist/server.js 
+```
+
