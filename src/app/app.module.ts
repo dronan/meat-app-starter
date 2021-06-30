@@ -7,6 +7,7 @@ import { ROUTES } from './app.route';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './security/login/login.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component'
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
@@ -31,7 +32,8 @@ import { LocationStrategy, HashLocationStrategy } from'@angular/common';
     MenuItemComponent,
     ReviewsComponent,
     OrderSummaryComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
