@@ -1,20 +1,17 @@
 import {MEAT_API} from '../app.api';
-import {map} from 'rxjs/operator/map';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core/';
 import {ShoppingCartService} from '../restaurant-detail/shopping-cart/shopping-cart.sevice';
 import {CartItem} from '../restaurant-detail/shopping-cart/cart-item.model';
-import { Order, OrderItem } from './order.model';
+import { Order  } from './order.model';
 import { Observable } from 'rxjs/Observable';
 
-import { LoginService } from 'app/security/login/login.service';
 
 @Injectable()
 export class OrderService {
     
     constructor(private cartService: ShoppingCartService, 
-                private http: HttpClient,
-                private loginService: LoginService){}
+                private http: HttpClient){}
 
     itemsValue(): number{
         return this.cartService.total()
@@ -37,12 +34,7 @@ export class OrderService {
     }
 
     checkOrder(order: Order): Observable<string>{
-        let headers = new HttpHeaders()
-        if (this.loginService.isLoggedIn()) {
-            headers = headers.set('Authorization', `Bearer ${this.loginService.user.accessToken}`)
-        }
-        // headers.append('ContentType', 'application/json')
-        return this.http.post<Order>(`${MEAT_API}/orders`, order, { headers })
+        return this.http.post<Order>(`${MEAT_API}/orders`, order)
                         .map(order => order.id )
     }
 

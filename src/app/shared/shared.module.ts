@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './../security/auth.interceptor';
 import { LeaveOrderGuard } from './../order/leave-order.guard';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
@@ -14,19 +15,48 @@ import { NotificationService } from './messages/notification.service';
 import { LoginService } from 'app/security/login/login.service';
 import { LoggedInGuard } from 'app/security/loggedin.guard';
 import { UserDetailComponent } from 'app/header/user-detail/user-detail.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
-    declarations:[RadioComponent, InputComponent, RatingComponent, SnackbarComponent, UserDetailComponent],
-    imports: [CommonModule, ReactiveFormsModule, FormsModule],
-    exports: [RadioComponent, InputComponent, RatingComponent, UserDetailComponent, CommonModule, ReactiveFormsModule, FormsModule, SnackbarComponent]
+    declarations:[
+        RadioComponent,
+        InputComponent,
+        RatingComponent,
+        SnackbarComponent,
+        UserDetailComponent
+    ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    exports: [
+        RadioComponent,
+        InputComponent,
+        RatingComponent,
+        UserDetailComponent,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        SnackbarComponent
+    ]
 })
 
 export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [ShoppingCartService, LoggedInGuard, LeaveOrderGuard, LoginService, RestaurantsService, OrderService, NotificationService]
+            providers: [
+                ShoppingCartService, 
+                LoggedInGuard,
+                LeaveOrderGuard,
+                LoginService,
+                RestaurantsService,
+                OrderService,
+                NotificationService, 
+                { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+            ]
         }
     }
 }
