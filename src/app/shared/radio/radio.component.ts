@@ -16,7 +16,7 @@ import { RadioOption } from './radio-option.model';
 export class RadioComponent implements OnInit, ControlValueAccessor {
   
   onChange: any
-  
+  onTouched: any
 
   @Input() options: RadioOption[];
 
@@ -30,6 +30,7 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   setValue(value: any){
     this.value = value;
     this.onChange(this.value);
+    this.onTouched();
   }
 
   writeValue(obj: any): void {
@@ -41,6 +42,7 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {
