@@ -1,6 +1,6 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { ROUTES } from './app.route';
@@ -19,6 +19,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LocationStrategy, HashLocationStrategy } from'@angular/common';
+import { ApplicationErrorHandler } from './app.error-handler';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { LocationStrategy, HashLocationStrategy } from'@angular/common';
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: ErrorHandler, useClass: ApplicationErrorHandler},
     {provide: LOCALE_ID, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent]
