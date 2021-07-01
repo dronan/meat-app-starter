@@ -1,3 +1,4 @@
+import { LeaveOrderGuard } from './../order/leave-order.guard';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {NgModule, ModuleWithProviders} from '@angular/core';
@@ -25,7 +26,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [ShoppingCartService, LoggedInGuard, LoginService, RestaurantsService, OrderService, NotificationService]
+            providers: [ShoppingCartService, LoggedInGuard, LeaveOrderGuard, LoginService, RestaurantsService, OrderService, NotificationService]
         }
     }
 }

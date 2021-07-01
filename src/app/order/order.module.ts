@@ -1,3 +1,4 @@
+import { LeaveOrderGuard } from './leave-order.guard';
 import {NgModule} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -8,7 +9,7 @@ import {OrderItemsComponent} from './order-items/order-items.component';
 import {OrderComponent} from './order.component';
 
 const ROUTES: Routes = [
-    {path:'', component: OrderComponent}
+    {path:'', component: OrderComponent, canDeactivate: [LeaveOrderGuard]}
 ]
 
 @NgModule({

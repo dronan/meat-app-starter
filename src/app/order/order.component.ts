@@ -5,6 +5,7 @@ import { RadioOption } from 'app/shared/radio/radio-option.model';
 import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/cart-item.model';
 import { Order , OrderItem} from './order.model';
+import 'rxjs/add/operator/do'
 
 @Component({
   selector: 'mt-order',
@@ -14,6 +15,8 @@ export class OrderComponent implements OnInit {
 
   orderForm: FormGroup
   delivery: number = 8
+
+  orderId: string; 
 
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
@@ -81,13 +84,18 @@ export class OrderComponent implements OnInit {
     order.orderItems = this.cartItems()
         .map((item:CartItem) => new OrderItem(item.quantity, item.menuItem.id))
 
-    this.orderService.checkOrder(order).subscribe( (orderId: string) => {
+    this.orderService.checkOrder(order)
+                     .do( (orderId: string) => this.orderId = orderId )                  
+                     .subscribe( (orderId: string) => {
       this.router.navigate(['/order-summary'])
-      console.log(`Compra Concluida : ${orderId}`)
       this.orderService.clear()
     })
 
     console.log(order)
+  }
+
+  isOrderCompleted(): boolean {
+    return this.orderId !== undefined;
   }
 
 
