@@ -111,7 +111,7 @@ Dependências dos pacotes que devem ficar em package.json:
     "rxjs-compat": "6.0.0",
     "ts-helpers": "1.1.2",
     "web-animations-js": "2.2.5",
-    "zone.js": "0.8.26",
+    "zone.js": "0.8.29",
     "ajv": "6.0.0"
   },
   "devDependencies": {
